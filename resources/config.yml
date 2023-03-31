@@ -6,8 +6,8 @@
 # [✓] Default Time Is 6
 "delay": 6
 # [✓] Type The World Name Where The Plugin Will Work !
-# [✓] Default Level Name Is "world"
-"levelname": "world"
+# [✓] Default Level Name Is "dungeon"
+"levelname": "dungeon"
 # [✓] Now Here You Can Customize The Block If They Can Regen Or Not
 "coal_ore": true
 "iron_ore": true
@@ -18,16 +18,8 @@
 "lapis_ore": true
 "carrot_block": true
 "potato_block": true
-"wheat_block": true
 "pumkin": true
 "cactus": true
-"sand": true
-"sugarcane": true
 "melon_block": true
-"spruce_wood": true
-"birch_wood": true
-"dark_oak_wood": true
-"acacia_wood": true
-"jungle_wood": true
 
 # [✓] Make Sure To Give A Star On This Plugin In GitHub !

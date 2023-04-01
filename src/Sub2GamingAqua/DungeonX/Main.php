@@ -52,7 +52,7 @@ class Main extends PluginBase implements Listener{
                 $event->setDrops([]);
                 $event->cancel();
                 $event->setXpDropAmount(0);
-                $player->addXp($event->getXpDropAmount());
+                $player->getXpManager()->addXp($event->getXpDropAmount());
                 $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::STONE());
                 $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
             } elseif($blocks->getId() === 56 && $this->config->get("diamond_ore") === true){

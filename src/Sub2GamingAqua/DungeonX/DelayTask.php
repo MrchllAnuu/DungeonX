@@ -3,6 +3,7 @@
 namespace Sub2GamingAqua\DungeonX;
 
 use pocketmine\block\Block;
+use pocketmine\block\BlockFactory;
 use pocketmine\scheduler\Task;
 
 class DelayTask extends Task {
@@ -14,7 +15,7 @@ class DelayTask extends Task {
         $this->block = $block;
     }
 
-    public function onRun(int $currentTick) {
-        $this->block->getLevelNonNull()->setBlock($this->block->asVector3(), Block::get($this->block->getId()));
+    public function onRun() : void{
+        $this->block->getPosition()->getWorld()->setBlock($this->block->getPosition()->asVector3(), BlockFactory::getInstance()->get($this->block->getId()));
     }
 }

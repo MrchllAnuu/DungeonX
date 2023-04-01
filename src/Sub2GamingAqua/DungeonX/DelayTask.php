@@ -16,6 +16,6 @@ class DelayTask extends Task {
     }
 
     public function onRun() : void{
-        $this->block->getPosition()->getWorld()->setBlock($this->block->getPosition()->asVector3(), BlockFactory::getInstance()->get($this->block->getId()));
+        $this->block->getPosition()->getWorld()->setBlock($this->block->getPosition()->asVector3(), BlockFactory::getInstance()->get($this->block->getId(), 0));
     }
 }

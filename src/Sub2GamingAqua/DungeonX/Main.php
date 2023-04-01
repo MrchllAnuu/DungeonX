@@ -3,6 +3,7 @@
 namespace Sub2GamingAqua\DungeonX;
 
 use pocketmine\block\Block;
+use pocketmine\block\VanillaBlocks;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
@@ -21,9 +22,30 @@ class Main extends PluginBase implements Listener{
 
     public function onBlockBreak(BlockBreakEvent $event){
         $player = $event->getPlayer();
-        $block = $event->getBlock();
-        if($block->getWorld()->getName() === $this->config->get("levelname")){
-            if($block->getId() === 16 && $this->config->get("coal_ore") === true){
+        $blocks = $event->getBlock();
+        $block = $event->getBlock()->getPosition();
+        if($block->getWorld()->getFolderName() === $this->config->get("levelname")){
+            if($blocks->getId() === 16 && $this->config->get("coal_ore") === true){
+                foreach ($event->getDrops() as $drop) {
+                    $event->getPlayer()->getInventory()->addItem($drop);
+                }
+                $event->setDrops([]);
+                $event->cancel();
+                $event->setXpDropAmount(0);
+                $player->getXpManager()->addXp($event->getXpDropAmount());
+                $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::STONE());
+                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
+            } elseif($blocks->getId() === 15 && $this->config->get("iron_ore") === true){
+                foreach ($event->getDrops() as $drop) {
+                    $event->getPlayer()->getInventory()->addItem($drop);
+                }
+                $event->setDrops([]);
+                $event->cancel();
+                $event->setXpDropAmount(0);
+                $player->getXpManager()->addXp($event->getXpDropAmount());
+                $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::STONE());
+                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
+            } elseif($blocks->getId() === 14 && $this->config->get("gold_ore") === true){
                 foreach ($event->getDrops() as $drop) {
                     $event->getPlayer()->getInventory()->addItem($drop);
                 }
@@ -31,118 +53,98 @@ class Main extends PluginBase implements Listener{
                 $event->cancel();
                 $event->setXpDropAmount(0);
                 $player->addXp($event->getXpDropAmount());
-                $block->getWorld()->setBlock($block->asVector3(), Block::get(Block::STONE));
-                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $block), 20 * $this->config->get("delay"));
-            } elseif($block->getId() === 15 && $this->config->get("iron_ore") === true){
+                $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::STONE());
+                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
+            } elseif($blocks->getId() === 56 && $this->config->get("diamond_ore") === true){
                 foreach ($event->getDrops() as $drop) {
                     $event->getPlayer()->getInventory()->addItem($drop);
                 }
                 $event->setDrops([]);
+                $player->getXpManager()->addXp($event->getXpDropAmount());
                 $event->cancel();
                 $event->setXpDropAmount(0);
-                $player->addXp($event->getXpDropAmount());
-                $block->getWorld()->setBlock($block->asVector3(), Block::get(Block::STONE));
-                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $block), 20 * $this->config->get("delay"));
-            } elseif($block->getId() === 14 && $this->config->get("gold_ore") === true){
+                $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::STONE());
+                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
+            } elseif($blocks->getId() === 129 && $this->config->get("emerald_ore") === true){
                 foreach ($event->getDrops() as $drop) {
                     $event->getPlayer()->getInventory()->addItem($drop);
                 }
                 $event->setDrops([]);
+                $player->getXpManager()->addXp($event->getXpDropAmount());
                 $event->cancel();
                 $event->setXpDropAmount(0);
-                $player->addXp($event->getXpDropAmount());
-                $block->getWorld()->setBlock($block->asVector3(), Block::get(Block::STONE));
-                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $block), 20 * $this->config->get("delay"));
-            } elseif($block->getId() === 56 && $this->config->get("diamond_ore") === true){
+                $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::STONE());
+                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
+            } elseif($blocks->getId() === 153 && $this->config->get("quartz_ore") === true){
                 foreach ($event->getDrops() as $drop) {
                     $event->getPlayer()->getInventory()->addItem($drop);
                 }
                 $event->setDrops([]);
-                $player->addXp($event->getXpDropAmount());
+                $player->getXpManager()->addXp($event->getXpDropAmount());
                 $event->cancel();
                 $event->setXpDropAmount(0);
-                $block->getWorld()->setBlock($block->asVector3(), Block::get(Block::STONE));
-                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $block), 20 * $this->config->get("delay"));
-            } elseif($block->getId() === 129 && $this->config->get("emerald_ore") === true){
+                $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::STONE());
+                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
+            } elseif($blocks->getId() === 21 && $this->config->get("lapis_ore") == true){
                 foreach ($event->getDrops() as $drop) {
                     $event->getPlayer()->getInventory()->addItem($drop);
                 }
                 $event->setDrops([]);
-                $player->addXp($event->getXpDropAmount());
+                $player->getXpManager()->addXp($event->getXpDropAmount());
                 $event->cancel();
                 $event->setXpDropAmount(0);
-                $block->getWorld()->setBlock($block->asVector3(), Block::get(Block::STONE));
-                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $block), 20 * $this->config->get("delay"));
-            } elseif($block->getId() === 153 && $this->config->get("quartz_ore") === true){
+                $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::AIR());
+                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
+            } elseif($blocks->getId() === 142 && $this->config->get("potato_block") === true){
                 foreach ($event->getDrops() as $drop) {
                     $event->getPlayer()->getInventory()->addItem($drop);
                 }
                 $event->setDrops([]);
-                $player->addXp($event->getXpDropAmount());
+                $player->getXpManager()->addXp($event->getXpDropAmount());
                 $event->cancel();
                 $event->setXpDropAmount(0);
-                $block->getWorld()->setBlock($block->asVector3(), Block::get(Block::STONE));
-                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $block), 20 * $this->config->get("delay"));
-            } elseif($block->getId() === 21 && $this->config->get("lapis_ore") == true){
+                $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::STONE());
+                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
+            } elseif($blocks->getId() === 141 && $this->config->get("carrot_block") === true){
                 foreach ($event->getDrops() as $drop) {
                     $event->getPlayer()->getInventory()->addItem($drop);
                 }
                 $event->setDrops([]);
-                $player->addXp($event->getXpDropAmount());
+                $player->getXpManager()->addXp($event->getXpDropAmount());
                 $event->cancel();
                 $event->setXpDropAmount(0);
-                $block->getWorld()->setBlock($block->asVector3(), Block::get(Block::AIR));
-                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $block), 20 * $this->config->get("delay"));
-            } elseif($block->getId() === 142 && $this->config->get("potato_block") === true){
+                $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::STONE());
+                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
+            } elseif($blocks->getId() === 103 && $this->config->get("melon_block") === true){
                 foreach ($event->getDrops() as $drop) {
                     $event->getPlayer()->getInventory()->addItem($drop);
                 }
                 $event->setDrops([]);
-                $player->addXp($event->getXpDropAmount());
+                $player->getXpManager()->addXp($event->getXpDropAmount());
                 $event->cancel();
                 $event->setXpDropAmount(0);
-                $block->getWorld()->setBlock($block->asVector3(), Block::get(Block::AIR));
-                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $block), 20 * $this->config->get("delay"));
-            } elseif($block->getId() === 141 && $this->config->get("carrot_block") === true){
+                $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::STONE());
+                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
+            } elseif(in_array($blocks->getId(), [83, 0]) && $this->config->get("sugarcane") === true){
                 foreach ($event->getDrops() as $drop) {
                     $event->getPlayer()->getInventory()->addItem($drop);
                 }
                 $event->setDrops([]);
-                $player->addXp($event->getXpDropAmount());
+                $player->getXpManager()->addXp($event->getXpDropAmount());
                 $event->cancel();
                 $event->setXpDropAmount(0);
-                $block->getWorld()->setBlock($block->asVector3(), Block::get(Block::AIR));
-                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $block), 20 * $this->config->get("delay"));
-            } elseif($block->getId() === 103 && $this->config->get("melon_block") === true){
+                $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::STONE());
+                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
+            } elseif($blocks->getId() === 81 && $this->config->get("cactus") == true){
                 foreach ($event->getDrops() as $drop) {
                     $event->getPlayer()->getInventory()->addItem($drop);
                 }
                 $event->setDrops([]);
-                $player->addXp($event->getXpDropAmount());
+                $player->getXpManager()->addXp($event->getXpDropAmount());
                 $event->cancel();
                 $event->setXpDropAmount(0);
-                $block->getWorld()->setBlock($block->asVector3(), Block::get(Block::AIR));
-                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $block), 20 * $this->config->get("delay"));
-            } elseif(in_array($block->getId(), [83, 0]) && $this->config->get("sugarcane") === true){
-                foreach ($event->getDrops() as $drop) {
-                    $event->getPlayer()->getInventory()->addItem($drop);
-                }
-                $event->setDrops([]);
-                $player->addXp($event->getXpDropAmount());
-                $event->cancel();
-                $event->setXpDropAmount(0);
-                $block->getWorld()->setBlock($block->asVector3(), Block::get(Block::AIR));
-                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $block), 20 * $this->config->get("delay"));
-            } elseif($block->getId() === 81 && $this->config->get("cactus") == true){
-                foreach ($event->getDrops() as $drop) {
-                    $event->getPlayer()->getInventory()->addItem($drop);
-                }
-                $event->setDrops([]);
-                $player->addXp($event->getXpDropAmount());
-                $event->cancel();
-                $event->setXpDropAmount(0);
-                $block->getWorld()->setBlock($block->asVector3(), Block::get(Block::AIR));
-                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $block), 20 * $this->config->get("delay"));
+                $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::AIR());
+                $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
             }
         }
     }

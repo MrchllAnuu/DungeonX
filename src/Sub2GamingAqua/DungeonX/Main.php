@@ -8,6 +8,7 @@ use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 use pocketmine\utils\Config;
+use pocketmine\player\GameMode;
 
 class Main extends PluginBase implements Listener{
 
@@ -20,10 +21,13 @@ class Main extends PluginBase implements Listener{
         $this->config = new Config($this->getDataFolder()."config.yml", Config::YAML);
     }
 
-    public function onBlockBreak(BlockBreakEvent $event){
+    public function onBlockBreak(BlockBreakEvent $event) : void {
         $player = $event->getPlayer();
         $blocks = $event->getBlock();
         $block = $event->getBlock()->getPosition();
+        if ($player->getGamemode()->equals(GameMode::CREATIVE()) || $player->getGamemode()->equals(GameMode::SPECTATOR())) {
+            return;
+        }
         if($block->getWorld()->getFolderName() === $this->config->get("levelname")){
             if($blocks->getId() === 16 && $this->config->get("coal_ore") === true){
                 foreach ($event->getDrops() as $drop) {
@@ -93,7 +97,7 @@ class Main extends PluginBase implements Listener{
                 $player->getXpManager()->addXp($event->getXpDropAmount());
                 $event->cancel();
                 $event->setXpDropAmount(0);
-                $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::AIR());
+                $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::BEDROCK());
                 $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
             } elseif($blocks->getId() === 142 && $this->config->get("potato_block") === true){
                 foreach ($event->getDrops() as $drop) {

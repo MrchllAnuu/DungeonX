@@ -114,7 +114,7 @@ class Main extends PluginBase implements Listener{
                 $event->setXpDropAmount(0);
                 $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::BEDROCK());
                 $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
-            } elseif($blocks->getId() === 21 && $this->config->get("lapis_ore") == true){
+            } elseif($blocks->getTypeId() == BlockTypeIds::LAPIS_LAZULI_ORE() && $this->config->get("lapis_ore") == true){
                 foreach ($event->getDrops() as $drop) {
                     if ($player->getInventory()->canAddItem($drop)) {
                         $event->getPlayer()->getInventory()->addItem($drop);
@@ -128,7 +128,7 @@ class Main extends PluginBase implements Listener{
                 $event->setXpDropAmount(0);
                 $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::BEDROCK());
                 $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
-            } elseif($blocks->getId() === 142 && $this->config->get("potato_block") === true){
+            } elseif($blocks->getTypeId() == ItemTypeIds::POTATO() && $this->config->get("potato_block") === true){
                 foreach ($event->getDrops() as $drop) {
                     if ($player->getInventory()->canAddItem($drop)) {
                         $event->getPlayer()->getInventory()->addItem($drop);
@@ -142,7 +142,7 @@ class Main extends PluginBase implements Listener{
                 $event->setXpDropAmount(0);
                 $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::BEDROCK());
                 $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
-            } elseif($blocks->getId() === 141 && $this->config->get("carrot_block") === true){
+            } elseif($blocks->getTypeId() == ItemTypeIds::CARROT() && $this->config->get("carrot_block") === true){
                 foreach ($event->getDrops() as $drop) {
                     if ($player->getInventory()->canAddItem($drop)) {
                         $event->getPlayer()->getInventory()->addItem($drop);
@@ -156,7 +156,7 @@ class Main extends PluginBase implements Listener{
                 $event->setXpDropAmount(0);
                 $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::BEDROCK());
                 $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
-            } elseif($blocks->getId() === 103 && $this->config->get("melon_block") === true){
+            } elseif($blocks->getTypeId() == ItemTypeIds::MELON() && $this->config->get("melon_block") === true){
                 foreach ($event->getDrops() as $drop) {
                     if ($player->getInventory()->canAddItem($drop)) {
                         $event->getPlayer()->getInventory()->addItem($drop);
@@ -170,7 +170,7 @@ class Main extends PluginBase implements Listener{
                 $event->setXpDropAmount(0);
                 $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::BEDROCK());
                 $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
-            } elseif(in_array($blocks->getId(), [83, 0]) && $this->config->get("sugarcane") === true){
+            } elseif(in_array($blocks->getTypeId() == ItemTypeIds::SUGAR()  && $this->config->get("sugarcane") === true){
                 foreach ($event->getDrops() as $drop) {
                     if ($player->getInventory()->canAddItem($drop)) {
                         $event->getPlayer()->getInventory()->addItem($drop);
@@ -184,7 +184,7 @@ class Main extends PluginBase implements Listener{
                 $event->setXpDropAmount(0);
                 $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::BEDROCK());
                 $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
-            } elseif($blocks->getId() === 81 && $this->config->get("cactus") == true){
+            } elseif($blocks->getTypeId() == BlockTypeIds::CACTUS() && $this->config->get("cactus") == true){
                 foreach ($event->getDrops() as $drop) {
                     if ($player->getInventory()->canAddItem($drop)) {
                         $event->getPlayer()->getInventory()->addItem($drop);

@@ -4,6 +4,7 @@ namespace Sub2GamingAqua\DungeonX;
 
 use pocketmine\block\Block;
 use pocketmine\block\VanillaBlocks;
+use pocketmine\items\VanillaItems
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
@@ -29,7 +30,7 @@ class Main extends PluginBase implements Listener{
             return;
         }
         if($block->getWorld()->getFolderName() === $this->config->get("levelname")){
-            if($blocks->getId() === 16 && $this->config->get("coal_ore") === true){
+            if($blocks->getTypeId() == BlockTypeIds::COAL_ORE() && $this->config->get("coal_ore") === true){
                 foreach ($event->getDrops() as $drop) {
                     if ($player->getInventory()->canAddItem($drop)) {
                         $event->getPlayer()->getInventory()->addItem($drop);
@@ -43,7 +44,7 @@ class Main extends PluginBase implements Listener{
                 $player->getXpManager()->addXp($event->getXpDropAmount());
                 $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::BEDROCK());
                 $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
-            } elseif($blocks->getId() === 15 && $this->config->get("iron_ore") === true){
+            } elseif($blocks->getTypeId() == BlockTypeIds::IRON_ORE() && $this->config->get("iron_ore") === true){
                 foreach ($event->getDrops() as $drop) {
                     if ($player->getInventory()->canAddItem($drop)) {
                         $event->getPlayer()->getInventory()->addItem($drop);
@@ -57,7 +58,7 @@ class Main extends PluginBase implements Listener{
                 $player->getXpManager()->addXp($event->getXpDropAmount());
                 $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::BEDROCK());
                 $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
-            } elseif($blocks->getId() === 14 && $this->config->get("gold_ore") === true){
+            } elseif($blocks->getTypeId() == BlockTypeIds::GOLD_ORE() && $this->config->get("gold_ore") === true){
                 foreach ($event->getDrops() as $drop) {
                     if ($player->getInventory()->canAddItem($drop)) {
                         $event->getPlayer()->getInventory()->addItem($drop);
@@ -71,7 +72,7 @@ class Main extends PluginBase implements Listener{
                 $player->getXpManager()->addXp($event->getXpDropAmount());
                 $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::BEDROCK());
                 $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
-            } elseif($blocks->getId() === 56 && $this->config->get("diamond_ore") === true){
+            } elseif($blocks->getTypeId() == BlockTypeIds::DIAMOND_ORE() && $this->config->get("diamond_ore") === true){
                 foreach ($event->getDrops() as $drop) {
                     if ($player->getInventory()->canAddItem($drop)) {
                         $event->getPlayer()->getInventory()->addItem($drop);
@@ -85,7 +86,7 @@ class Main extends PluginBase implements Listener{
                 $event->setXpDropAmount(0);
                 $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::BEDROCK());
                 $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
-            } elseif($blocks->getId() === 129 && $this->config->get("emerald_ore") === true){
+            } elseif($blocks->getTypeId() == BlockTypeIds::EMERALD_ORE() && $this->config->get("emerald_ore") === true){
                 foreach ($event->getDrops() as $drop) {
                     if ($player->getInventory()->canAddItem($drop)) {
                         $event->getPlayer()->getInventory()->addItem($drop);
@@ -99,7 +100,7 @@ class Main extends PluginBase implements Listener{
                 $event->setXpDropAmount(0);
                 $block->getWorld()->setBlock($block->asVector3(), VanillaBlocks::BEDROCK());
                 $this->getScheduler()->scheduleDelayedTask(new DelayTask($this, $blocks), 20 * $this->config->get("delay"));
-            } elseif($blocks->getId() === 153 && $this->config->get("quartz_ore") === true){
+            } elseif($blocks->getTypeId() == BlockTypeIds::QUARTZ_ORE() && $this->config->get("quartz_ore") === true){
                 foreach ($event->getDrops() as $drop) {
                     if ($player->getInventory()->canAddItem($drop)) {
                         $event->getPlayer()->getInventory()->addItem($drop);
